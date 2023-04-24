@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Clothing } from "../mocks/types";
 
 type Props = {
-  clothing: Clothing;
+  clothing: Clothing[];
 };
 
 export default function Home({ clothing }: Props) {
@@ -19,30 +19,18 @@ export default function Home({ clothing }: Props) {
           <li className="font-bold text-lg">About</li>
         </ul>
       </div>
-      <div className="flex gap-12 flex-wrap pt-12 ml-12 w-full">
-        <div>
-          <img
-            className="w-56 h-56 object-cover rounded-md"
-            src={clothing.url}
-          ></img>
-          <p>{clothing.name}</p>
-          <p>{clothing.price}</p>
-        </div>
-        <div>
-          <img
-            className="w-56 h-56 object-cover rounded-md"
-            src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2670&q=80"
-          ></img>
-          <p>Name</p>
-          <p>Price</p>
-        </div>
-        <div>
-          <img
-            className="w-56 h-56 object-cover rounded-md"
-            src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2670&q=80"
-          ></img>
-          <p>Name</p>
-          <p>Price</p>
+      <div>
+        <div className="flex gap-12 flex-wrap pt-12 ml-12 w-full">
+          {clothing.map((c) => (
+            <div key="c">
+              <img
+                className="w-56 h-56 object-cover rounded-md"
+                src={c.url}
+              ></img>
+              <p>{c.name}</p>
+              <p>{c.price}</p>
+            </div>
+          ))}
         </div>
       </div>
     </div>
@@ -51,7 +39,7 @@ export default function Home({ clothing }: Props) {
 
 export async function getServerSideProps() {
   const res = await fetch("http://shop.com/api/clothing");
-  const clothing = await res.json();
+  const { clothing } = await res.json();
 
   return {
     props: {
