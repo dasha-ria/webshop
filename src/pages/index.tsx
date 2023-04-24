@@ -1,6 +1,13 @@
-export default function Home() {
+import { useState } from "react";
+import { Clothing } from "../mocks/types";
+
+type Props = {
+  clothing: Clothing;
+};
+
+export default function Home({ clothing }: Props) {
   return (
-    <body className="w-screen h-screen bg-white">
+    <div className="w-screen h-screen bg-white">
       <div className="flex items-end">
         <img className="w-40 h-auto ml-12 pt-8" src="studio47.svg"></img>
 
@@ -16,10 +23,10 @@ export default function Home() {
         <div>
           <img
             className="w-56 h-56 object-cover rounded-md"
-            src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2670&q=80"
+            src={clothing.url}
           ></img>
-          <p>Name</p>
-          <p>Price</p>
+          <p>{clothing.name}</p>
+          <p>{clothing.price}</p>
         </div>
         <div>
           <img
@@ -38,6 +45,17 @@ export default function Home() {
           <p>Price</p>
         </div>
       </div>
-    </body>
+    </div>
   );
+}
+
+export async function getServerSideProps() {
+  const res = await fetch("http://shop.com/api/clothing");
+  const clothing = await res.json();
+
+  return {
+    props: {
+      clothing,
+    },
+  };
 }
