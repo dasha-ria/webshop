@@ -5,4 +5,5 @@ export type Clothing = {
   price: number;
   discount: number;
   quantity: number;
+  id: string;
 };

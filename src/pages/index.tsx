@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { useState } from "react";
 import { Clothing } from "../mocks/types";
 
@@ -22,14 +23,18 @@ export default function Home({ clothing }: Props) {
       <div>
         <div className="flex gap-12 flex-wrap pt-12 ml-12 w-full">
           {clothing.map((c) => (
-            <div key="c">
-              <img
-                className="w-56 h-56 object-cover rounded-md"
-                src={c.url}
-              ></img>
-              <p>{c.name}</p>
-              <p>{c.price}</p>
-            </div>
+            <Link key={c.id} href={`/item/${c.id}`}>
+              <div>
+                <img
+                  className="w-56 h-56 object-cover rounded-md"
+                  src={c.url}
+                ></img>
+                <p>{c.name}</p>
+                <p>
+                  $<span>{c.price}</span>
+                </p>
+              </div>
+            </Link>
           ))}
         </div>
       </div>
@@ -38,7 +43,7 @@ export default function Home({ clothing }: Props) {
 }
 
 export async function getServerSideProps() {
-  const res = await fetch("http://shop.com/api/clothing");
+  const res = await fetch("http://shop.test/api/clothing");
   const { clothing } = await res.json();
 
   return {
