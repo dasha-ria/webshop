@@ -10,7 +10,9 @@ export default function Home({ clothing }: Props) {
   return (
     <div className="w-screen h-screen bg-white">
       <div className="flex items-end">
-        <img className="w-40 h-auto ml-12 pt-8" src="studio47.svg"></img>
+        <Link href="/">
+          <img className="w-40 h-auto ml-12 pt-8" src="studio47.svg"></img>
+        </Link>
 
         <ul className="flex gap-4 ml-12">
           <li className="font-bold text-lg">Home</li>

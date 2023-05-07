@@ -48,4 +48,13 @@ export const handlers = [
       })
     );
   }),
+
+  rest.get("http://shop.test/api/category/:category", (req, res, ctx) => {
+    const category = req.params.category;
+    return res(
+      ctx.json<{ clothing: Clothing[] }>({
+        clothing: clothing.filter((item) => item.category === category)!,
+      })
+    );
+  }),
 ];
