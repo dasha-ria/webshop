@@ -38,6 +38,11 @@ export default function Home({ clothing }: Props) {
           ))}
         </div>
       </div>
+      {clothing.map((c) => (
+        <Link key={c.category} href={`/category/${c.category}`}>
+          <p>{c.category}</p>
+        </Link>
+      ))}
     </div>
   );
 }
