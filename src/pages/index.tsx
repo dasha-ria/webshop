@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { Clothing } from "../mocks/types";
-import { getPrice } from "@/utils/pricing";
+import { getPrice, showOriginal } from "@/utils/pricing";
 
 type Props = {
   clothing: Clothing[];
@@ -35,9 +35,14 @@ export default function Home({ clothing }: Props) {
                   src={c.url}
                 ></img>
                 <p>{c.name}</p>
-                <p>
-                  $<span>{getPrice(c.price, c.discount)}</span>
-                </p>
+                <div className="flex gap-2">
+                  <p>
+                    $<span>{getPrice(c.price, c.discount)}</span>
+                  </p>
+                  <p className="line-through">
+                    <span>{showOriginal(c.price, c.discount)}</span>
+                  </p>
+                </div>
               </div>
             </Link>
           ))}
