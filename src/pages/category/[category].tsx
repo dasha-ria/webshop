@@ -9,7 +9,9 @@ export default function Category({ clothing }) {
         </Link>
 
         <ul className="flex gap-4 ml-12">
-          <li className="font-bold text-lg">Home</li>
+          <Link href="/">
+            <li className="font-bold text-lg">Home</li>
+          </Link>
           <li className="font-bold text-lg underline underline-offset-4">
             Shop
           </li>

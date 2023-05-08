@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { getPrice } from "@/utils/pricing";
 
 export default function Item({ clothing }) {
   return (
@@ -9,7 +10,9 @@ export default function Item({ clothing }) {
         </Link>
 
         <ul className="flex gap-4 ml-12">
-          <li className="font-bold text-lg">Home</li>
+          <Link href="/">
+            <li className="font-bold text-lg">Home</li>
+          </Link>
           <li className="font-bold text-lg underline underline-offset-4">
             Shop
           </li>
@@ -17,13 +20,13 @@ export default function Item({ clothing }) {
         </ul>
       </div>
 
-      <div className="ml-12 mt-24">
+      <div className="ml-12 mt-12">
         <img
           className="w-96 h-96 object-cover rounded-md"
           src={clothing.url}
         ></img>
         <p>{clothing.name}</p>
-        <p>{`$${clothing.price}`}</p>
+        <p>{`$${getPrice(clothing.price, clothing.discount)}`}</p>
         <p>{`${clothing.quantity} in stock`}</p>
       </div>
     </div>

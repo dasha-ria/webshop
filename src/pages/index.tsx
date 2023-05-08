@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { Clothing } from "../mocks/types";
+import { getPrice } from "@/utils/pricing";
 
 type Props = {
   clothing: Clothing[];
@@ -15,7 +16,9 @@ export default function Home({ clothing }: Props) {
         </Link>
 
         <ul className="flex gap-4 ml-12">
-          <li className="font-bold text-lg">Home</li>
+          <Link href="/">
+            <li className="font-bold text-lg">Home</li>
+          </Link>
           <li className="font-bold text-lg underline underline-offset-4">
             Shop
           </li>
@@ -33,7 +36,7 @@ export default function Home({ clothing }: Props) {
                 ></img>
                 <p>{c.name}</p>
                 <p>
-                  $<span>{c.price}</span>
+                  $<span>{getPrice(c.price, c.discount)}</span>
                 </p>
               </div>
             </Link>
