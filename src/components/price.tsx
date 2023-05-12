@@ -1,4 +1,4 @@
-import { getPrice } from "@/utils/pricing";
+import { getPrice } from "@/utils/getPrice";
 
 export const Price = ({ price, discount }) => {
   return (
@@ -6,7 +6,9 @@ export const Price = ({ price, discount }) => {
       <p>
         $<span>{getPrice(price, discount)}</span>
       </p>
-      {discount !== 0 ? <p className="line-through">${price}</p> : null}
+      {discount !== 0 ? (
+        <p className="line-through text-gray-500">${price}</p>
+      ) : null}
     </div>
   );
 };

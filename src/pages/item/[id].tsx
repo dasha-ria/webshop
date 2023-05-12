@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { getPrice, showOriginal } from "@/utils/pricing";
+import { getPrice, showOriginal } from "@/utils/getPrice";
+import { Price } from "@/components/price";
 
 export default function Item({ clothing }) {
   return (
@@ -26,12 +27,7 @@ export default function Item({ clothing }) {
           src={clothing.url}
         ></img>
         <p>{clothing.name}</p>
-        <div className="flex gap-2">
-          <p>{`$${getPrice(clothing.price, clothing.discount)}`}</p>
-          {/* <p className="line-through">
-            <span>{showOriginal(clothing.price, clothing.discount)}</span>
-          </p> */}
-        </div>
+        <Price price={clothing.price} discount={clothing.discount}></Price>
         <p>{`${clothing.quantity} in stock`}</p>
       </div>
     </div>
