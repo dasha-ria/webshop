@@ -31,6 +31,7 @@ export default function Category({ clothing }) {
                 <p>
                   $<span>{c.price}</span>
                 </p>
+                <p></p>
               </div>
             </div>
           </Link>

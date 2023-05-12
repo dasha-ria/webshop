@@ -28,9 +28,9 @@ export default function Item({ clothing }) {
         <p>{clothing.name}</p>
         <div className="flex gap-2">
           <p>{`$${getPrice(clothing.price, clothing.discount)}`}</p>
-          <p className="line-through">
+          {/* <p className="line-through">
             <span>{showOriginal(clothing.price, clothing.discount)}</span>
-          </p>
+          </p> */}
         </div>
         <p>{`${clothing.quantity} in stock`}</p>
       </div>
