@@ -2,14 +2,16 @@ import Link from "next/link";
 import { useState } from "react";
 import { Clothing } from "../mocks/types";
 import { Price } from "@/components/price";
+import { AddToCartButton, ChangeAmount } from "@/components/cart-button";
 
 type Props = {
   clothing: Clothing[];
 };
 
 export default function Home({ clothing }: Props) {
+  const quantity = 0;
   return (
-    <div className="w-screen h-screen bg-white">
+    <div className="w-full h-full bg-white">
       <div className="flex items-end">
         <Link href="/">
           <img className="w-40 h-auto ml-12 pt-8" src="studio47.svg"></img>
@@ -26,27 +28,37 @@ export default function Home({ clothing }: Props) {
         </ul>
       </div>
       <div>
-        <div className="flex gap-12 flex-wrap pt-12 ml-12 w-full">
+        <div className="flex gap-12 flex-wrap pt-12 pb-8 ml-12 w-full">
           {clothing.map((c) => (
-            <Link key={c.id} href={`/item/${c.id}`}>
+            <div key={c.id}>
+              <Link href={`/item/${c.id}`}>
+                <div>
+                  <img
+                    className="w-56 h-56 object-cover rounded-md"
+                    src={c.url}
+                  ></img>
+                  <p>{c.name}</p>
+                  <Price price={c.price} discount={c.discount}></Price>
+                </div>
+              </Link>
               <div>
-                <img
-                  className="w-56 h-56 object-cover rounded-md"
-                  src={c.url}
-                ></img>
-                <p>{c.name}</p>
-                <Price price={c.price} discount={c.discount}></Price>
+                {quantity === 0 ? (
+                  <AddToCartButton></AddToCartButton>
+                ) : (
+                  <ChangeAmount quantity={quantity}></ChangeAmount>
+                )}
               </div>
-            </Link>
+            </div>
           ))}
         </div>
       </div>
-      {clothing.map((c) => (
+      {/* {clothing.map((c) => (
         <Link key={c.category} href={`/category/${c.category}`}>
           <p>{c.category}</p>
         </Link>
-      ))}
+      ))} */}
     </div>
+    //make new API endpoints for categories and fetch
   );
 }
 

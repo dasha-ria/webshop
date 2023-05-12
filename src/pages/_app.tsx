@@ -1,3 +1,4 @@
+import { ShoppingCartProvider } from "@/context/ShoppingCartContext";
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 
@@ -6,5 +7,9 @@ if (process.env.NODE_ENV === "development") {
 }
 
 export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />;
+  return (
+    <ShoppingCartProvider>
+      <Component {...pageProps} />
+    </ShoppingCartProvider>
+  );
 }
