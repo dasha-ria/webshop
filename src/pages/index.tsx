@@ -3,13 +3,16 @@ import { useState } from "react";
 import { Clothing } from "../mocks/types";
 import { Price } from "@/components/price";
 import { AddToCartButton, ChangeAmount } from "@/components/cart-button";
+import { useShoppingCart } from "@/context/ShoppingCartContext";
 
 type Props = {
   clothing: Clothing[];
+  id: Clothing["id"];
 };
 
-export default function Home({ clothing }: Props) {
-  const quantity = 0;
+export default function Home({ clothing, id }: Props) {
+  const { getItemQuantity } = useShoppingCart();
+  const quantity = getItemQuantity(id);
   return (
     <div className="w-full h-full bg-white">
       <div className="flex items-end">
@@ -43,9 +46,9 @@ export default function Home({ clothing }: Props) {
               </Link>
               <div>
                 {quantity === 0 ? (
-                  <AddToCartButton></AddToCartButton>
+                  <AddToCartButton id={id}></AddToCartButton>
                 ) : (
-                  <ChangeAmount quantity={quantity}></ChangeAmount>
+                  <ChangeAmount id={id} quantity={quantity}></ChangeAmount>
                 )}
               </div>
             </div>
