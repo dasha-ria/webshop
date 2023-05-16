@@ -7,12 +7,10 @@ import { useShoppingCart } from "@/context/ShoppingCartContext";
 
 type Props = {
   clothing: Clothing[];
-  id: Clothing["id"];
 };
 
-export default function Home({ clothing, id }: Props) {
+export default function Home({ clothing }: Props) {
   const { getItemQuantity } = useShoppingCart();
-  const quantity = getItemQuantity(id);
   return (
     <div className="w-full h-full bg-white">
       <div className="flex items-end">
@@ -45,10 +43,13 @@ export default function Home({ clothing, id }: Props) {
                 </div>
               </Link>
               <div>
-                {quantity === 0 ? (
-                  <AddToCartButton id={id}></AddToCartButton>
+                {getItemQuantity(c.id) === 0 ? (
+                  <AddToCartButton id={c.id}></AddToCartButton>
                 ) : (
-                  <ChangeAmount id={id} quantity={quantity}></ChangeAmount>
+                  <ChangeAmount
+                    id={c.id}
+                    quantity={getItemQuantity(c.id)}
+                  ></ChangeAmount>
                 )}
               </div>
             </div>

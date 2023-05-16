@@ -5,15 +5,15 @@ type ShoppingCartProviderProps = {
 };
 
 type cartItem = {
-  id: number;
+  id: string;
   quantity: number;
 };
 
 type ShoppingCartContext = {
-  getItemQuantity: (id: number) => number;
-  increaseCartQuantity: (id: number) => void;
-  decreaseCartQuantity: (id: number) => void;
-  removeFromCart: (id: number) => void;
+  getItemQuantity: (id: string) => number;
+  increaseCartQuantity: (id: string) => void;
+  decreaseCartQuantity: (id: string) => void;
+  removeFromCart: (id: string) => void;
 };
 
 const ShoppingCartContext = createContext({} as ShoppingCartContext);

@@ -1,6 +1,11 @@
 import { useShoppingCart } from "@/context/ShoppingCartContext";
+import { Clothing } from "@/mocks/types";
 
-export const AddToCartButton = ({ id }) => {
+type Props = {
+  id: Clothing["id"];
+};
+
+export const AddToCartButton = ({ id }: Props) => {
   const { increaseCartQuantity } = useShoppingCart();
   return (
     <button
