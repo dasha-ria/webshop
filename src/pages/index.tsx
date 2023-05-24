@@ -4,6 +4,8 @@ import { Clothing } from "../mocks/types";
 import { Price } from "@/components/price";
 import { AddToCartButton, ChangeAmount } from "@/components/cart-button";
 import { useShoppingCart } from "@/context/ShoppingCartContext";
+import { Navbar } from "@/components/navbar";
+import { ShoppingCart } from "@/components/shopping-cart";
 
 type Props = {
   clothing: Clothing[];
@@ -11,23 +13,13 @@ type Props = {
 
 export default function Home({ clothing }: Props) {
   const { getItemQuantity } = useShoppingCart();
+  const [showCart, setShowCart] = useState(false);
+
   return (
     <div className="w-full h-full bg-white text-black">
-      <div className="flex items-end">
-        <Link href="/">
-          <img className="w-40 h-auto ml-12 pt-8" src="studio47.svg"></img>
-        </Link>
-
-        <ul className="flex gap-4 ml-12">
-          <Link href="/">
-            <li className="font-bold text-lg">Home</li>
-          </Link>
-          <li className="font-bold text-lg underline underline-offset-4">
-            Shop
-          </li>
-          <li className="font-bold text-lg">About</li>
-        </ul>
-      </div>
+      <Navbar showCart={showCart} setShowCart={setShowCart}>
+        {showCart && <ShoppingCart />}
+      </Navbar>
       <div>
         <div className="flex gap-12 flex-wrap pt-12 pb-8 ml-12 w-full">
           {clothing.map((c) => (
