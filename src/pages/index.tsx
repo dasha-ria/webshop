@@ -12,7 +12,7 @@ type Props = {
 export default function Home({ clothing }: Props) {
   const { getItemQuantity } = useShoppingCart();
   return (
-    <div className="w-full h-full bg-white">
+    <div className="w-full h-full bg-white text-black">
       <div className="flex items-end">
         <Link href="/">
           <img className="w-40 h-auto ml-12 pt-8" src="studio47.svg"></img>
