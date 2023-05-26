@@ -1,8 +1,9 @@
 import { useShoppingCart } from "@/context/ShoppingCartContext";
 import Link from "next/link";
 
-export const Navbar = () => {
+export const Navbar = ({ cartPopup, setCartPopup }) => {
   const { openCart, cartQuantity } = useShoppingCart();
+  const openCartPopup = () => setCartPopup(true);
   return (
     <div className="flex items-end">
       <Link href="/">
@@ -21,7 +22,7 @@ export const Navbar = () => {
         <div>
           <button
             className="h-10 w-10 rounded-full cursor-pointer border border-black border-2 flex justify-center items-center hover:bg-gray-100"
-            onClick={openCart}
+            onClick={(openCart, openCartPopup)}
           >
             <img className="h-6 w-auto" src="shopping-cart.svg"></img>
           </button>

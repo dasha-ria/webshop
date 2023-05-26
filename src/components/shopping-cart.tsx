@@ -1,9 +1,11 @@
-import { useState } from "react";
-
-export const ShoppingCart = () => {
+export const ShoppingCart = ({ cartPopup, setCartPopup }) => {
+  const closeCartPopup = () => setCartPopup(false);
   return (
-    <div className="top-0 right-0 w-96 h-full">
-      <p>Cart</p>
+    <div className="flex justify-end pr-10">
+      <div className="flex flex-row gap-40 mt-5">
+        <p>Cart</p>
+        <button onClick={closeCartPopup}>close</button>
+      </div>
     </div>
   );
 };
