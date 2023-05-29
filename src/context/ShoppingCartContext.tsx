@@ -1,4 +1,3 @@
-import { ShoppingCart } from "@/components/shopping-cart";
 import { createContext, ReactNode, useContext, useState } from "react";
 
 type ShoppingCartProviderProps = {
@@ -18,12 +17,20 @@ type ShoppingCartContext = {
   removeFromCart: (id: string) => void;
   cartQuantity: number;
   cartItems: CartItem[];
+  closeCart: () => void;
+  isCartOpen: boolean;
 };
 
-const ShoppingCartContext = createContext({} as ShoppingCartContext);
+const ShoppingCartContext = createContext<ShoppingCartContext>(null);
 
 export function useShoppingCart() {
-  return useContext(ShoppingCartContext);
+  const context = useContext(ShoppingCartContext);
+  if (context === null) {
+    throw new Error(
+      "'useShoppingCart' cannot be used outside of <ShoppingCartProvider>"
+    );
+  }
+  return context;
 }
 
 export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
@@ -38,11 +45,11 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
     0
   );
 
-  function getItemQuantity(id: number) {
+  function getItemQuantity(id: string) {
     return cartItems.find((item) => item.id === id)?.quantity || 0;
   }
 
-  function increaseCartQuantity(id: number) {
+  function increaseCartQuantity(id: string) {
     setCartItems((currentItems) => {
       if (currentItems.find((item) => item.id === id) == null) {
         return [...currentItems, { id, quantity: 1 }];
@@ -58,7 +65,7 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
     });
   }
 
-  function decreaseCartQuantity(id: number) {
+  function decreaseCartQuantity(id: string) {
     setCartItems((currentItems) => {
       if (currentItems.find((item) => item.id === id)?.quantity === 1) {
         return currentItems.filter((item) => item.id !== id);
@@ -74,7 +81,7 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
     });
   }
 
-  function removeFromCart(id: number) {
+  function removeFromCart(id: string) {
     setCartItems((currentItems) => {
       return currentItems.filter((item) => item.id !== id);
     });
@@ -91,10 +98,10 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
         cartQuantity,
         openCart,
         closeCart,
+        isCartOpen,
       }}
     >
       {children}
-      <ShoppingCart />
     </ShoppingCartContext.Provider>
   );
 }
