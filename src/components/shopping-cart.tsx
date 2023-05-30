@@ -7,7 +7,7 @@ export const ShoppingCart = ({ clothing }) => {
 
   console.log(cartItems);
   return (
-    <div className="flex flex-col justify-end pr-10 gap-4">
+    <div className="flex flex-col justify-end p-4 gap-4 absolute top-24 right-10 border border-black bg-white shadow-md rounded-md">
       <div className="flex flex-row gap-40 mt-5 items-center justify-center">
         <p>Cart</p>
         <button onClick={closeCart}>
