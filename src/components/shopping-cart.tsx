@@ -41,7 +41,10 @@ export const ShoppingCart = ({ clothing }) => {
                     item.quantity}
                 </span>
               </div>
-              <div>
+              <div
+                className="cursor-pointer"
+                onClick={() => removeFromCart(item.id)}
+              >
                 <img className="w-5 h-5" src="trash.svg"></img>
               </div>
             </div>
