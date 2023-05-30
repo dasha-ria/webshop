@@ -12,3 +12,13 @@ export const Price = ({ price, discount }) => {
     </div>
   );
 };
+
+export const PriceWithoutOriginalPrice = ({ price, discount }) => {
+  return (
+    <div className="flex gap-2">
+      <p>
+        $<span>{getPrice(price, discount)}</span>
+      </p>
+    </div>
+  );
+};
