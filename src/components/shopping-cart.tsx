@@ -36,7 +36,7 @@ export const ShoppingCart = ({ clothing }) => {
                     ></PriceWithoutOriginalPrice>
                   </div>
                 </div>
-                <div>
+                <div className="w-8">
                   $
                   <span>
                     {getPrice(clothingData.price, clothingData.discount) *
