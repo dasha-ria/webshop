@@ -1,9 +1,23 @@
 import { useShoppingCart } from "@/context/ShoppingCartContext";
+import { useEffect, useRef } from "react";
 import { Price, PriceWithoutOriginalPrice } from "@/components/price";
 import { getPrice } from "@/utils/getPrice";
 
 export const ShoppingCart = ({ clothing }) => {
   const { closeCart, cartItems, removeFromCart } = useShoppingCart();
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (ref.current && !ref.current.contains(e.target)) {
+        closeCart();
+      }
+    };
+    document.addEventListener("click", handleClickOutside, true);
+    return () => {
+      document.removeEventListener("click", handleClickOutside, true);
+    };
+  }, [closeCart]);
 
   console.log(cartItems);
   return (
@@ -13,7 +27,10 @@ export const ShoppingCart = ({ clothing }) => {
           <img className="w-6 h-6" src="close.svg"></img>
         </button>
       </div>
-      <div className="flex flex-col gap-3 mt-5 items-center justify-center">
+      <div
+        ref={ref}
+        className="flex flex-col gap-3 mt-5 items-center justify-center"
+      >
         {cartItems.length === 0 ? (
           <p className="mb-8">Your cart is empty</p>
         ) : (
